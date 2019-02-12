@@ -22,8 +22,8 @@ public class BookstoreApplication {
 	public CommandLineRunner BookstoreDemo(BookRepository repository) {
 		return (args) -> {
 			log.info("A few books");
-			repository.save(new Book("Prince of Fools", "Mark Lawrence", "isbn 978-0-00-753156-1", 2015, 8.99));
-			repository.save(new Book("Harry Potter ja Azkabanin vanki", "J.K. Rowling", "isbn-13: 978-951-31-1737-5", 1999, 19.99));	
+			repository.save(new Book("Prince of Fools", "Mark Lawrence", "978-0-00-753156-1", 2015, 8.99));
+			repository.save(new Book("Harry Potter ja Azkabanin vanki", "J.K. Rowling", "978-951-31-1737-5", 1999, 19.99));	
 			
 			log.info("Fetch all books");
 			for (Book book : repository.findAll()) {
