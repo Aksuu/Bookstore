@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Book {
@@ -14,18 +16,23 @@ public class Book {
 	private int year;
 	private Double price;
 	
+	@ManyToOne // Student ManyToOne Department
+    @JoinColumn(name = "categoryId") // Foreign Key-määritys tietokantataulua varten
+    private Category category;
+	
 	public Book() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Book(String title, String author, String isbn, int year, Double price) {
+	public Book(String title, String author, String isbn, int year, Double price, Category category) {
 		super();
 		this.title = title;
 		this.author = author;
 		this.isbn = isbn;
 		this.year = year;
 		this.price = price;
+		this.category = category;
 	}
 	
 	public Long getId() {
@@ -75,10 +82,20 @@ public class Book {
 	public void setPrice(Double price) {
 		this.price = price;
 	}
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
 
 	@Override
 	public String toString() {
-		return "Book [id=" + id + ", title=" + title + ", author=" + author + ", isbn=" + isbn + ", year=" + year
+		if (this.category != null)
+			return "Book [id=" + id + ", title=" + title + ", author=" + author + ", isbn=" + isbn + ", year=" + year + ", price=" + price + " category =" + this.getCategory() + "]";
+		else
+			return "Book [id=" + id + ", title=" + title + ", author=" + author + ", isbn=" + isbn + ", year=" + year
 				+ ", price=" + price + "]";
 	}
 
