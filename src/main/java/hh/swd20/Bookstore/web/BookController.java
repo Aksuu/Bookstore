@@ -1,11 +1,15 @@
 package hh.swd20.Bookstore.web;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import hh.swd20.Bookstore.domain.Book;
 import hh.swd20.Bookstore.domain.BookRepository;
@@ -51,6 +55,16 @@ public class BookController {
 	public String editBook(@PathVariable("id") Long editId, Model model) {
 		model.addAttribute("book", repository.findById(editId));
 		return "editbook";
+	}
+	
+	@GetMapping("/books")
+	public @ResponseBody List<Book> bookListRest() {
+		return (List<Book>) repository.findAll();
+	}
+	
+	@GetMapping("/book/{id}")
+	public @ResponseBody Optional<Book> findBookRes(@PathVariable("id") Long bookId){
+		return repository.findById(bookId);
 	}
 	
 }
